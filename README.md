@@ -87,6 +87,32 @@ And these could also be used to construct Element Queries for other syntaxes lik
 
 Essentially QSS acts as a syntax to abstract away writing these: [Useful Tests for JS-powered Styling](https://codepen.io/tomhodgins/post/useful-tests-for-js-powered-styling)
 
+## Plugin Usage
+
+This repository contains a working proof of concept of a plugin to parse and read QSS syntax. In order to use this plugin you just need to include QSS on the page where you want it to display:
+
+```html
+<script src=qss.js></script>
+```
+
+Then you're able to add queries written in QSS syntax to your site using one of the following methods: a `<style>` tag, a `<link>` tag with `type=text/qss` set, or a `<script>` tag with a `type` of `text/qss` either inline or linked externally using a `src=""` attribute:
+
+```html
+<style type="text/qss"></style>
+```
+
+```html
+<link type="text/qss" href=stylesheet.qss rel=stylesheet>
+```
+
+```html
+<script type="text/qss"></script>
+```
+
+```html
+<script type="text/qss" src=stylesheet.qss></script>
+```
+
 ## Links
 
 - Website: [tomhodgins.github.io/qss/](http://tomhodgins.github.io/qss/)

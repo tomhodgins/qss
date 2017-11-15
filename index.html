@@ -161,6 +161,23 @@ div @ >=500 width {}</pre>
 
 <p>Essentially QSS acts as a syntax to abstract away writing these: <a href=https://codepen.io/tomhodgins/post/useful-tests-for-js-powered-styling>Useful Tests for JS-powered Styling</a></p>
 
+
+<h2>Plugin Usage</h2>
+
+<p>This repository contains a working proof of concept of a plugin to parse and read QSS syntax. In order to use this plugin you just need to include QSS on the page where you want it to display:</p>
+
+<pre>&lt;script src=qss.js>&lt;/script></pre>
+
+<p>Then you're able to add queries written in QSS syntax to your site using one of the following methods: a <code>&lt;style></code> tag, a <code>&lt;link></code> tag with <code>type=text/qss</code> set, or a <code>&lt;script></code> tag with a <code>type</code> of <code>text/qss</code> either inline or linked externally using a <code>src=""</code> attribute:</p>
+
+<pre>&lt;style type="text/qss">&lt;/style></pre>
+
+<pre>&lt;link type="text/qss" href=stylesheet.qss rel=stylesheet></pre>
+
+<pre>&lt;script type="text/qss">&lt;/script></pre>
+
+<pre>&lt;script type="text/qss" src=stylesheet.qss>&lt;/script></pre>
+
 <h3>Links</h3>
 
 <ul>
