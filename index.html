@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<title>QSS - A Simple Query Syntax</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: auto;
+  }
+  html {
+    font-size: 12pt;
+    line-height: 1.4;
+    font-weight: 400;
+    font-family: sans-serif;
+  }
+  body {
+    padding: 1em;
+    margin: 0 auto;
+    max-width: 800px;
+  }
+  img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+  }
+  img[src*=svg] {
+    display: block;
+    max-width: 300px;
+    margin: 4em auto 2em;
+  }
+  code,
+  pre,
+  blockquote {
+    padding: .1em .3em;
+    background: rgba(0,0,0,.1);
+  }
+  code,
+  pre {
+    font-family: monospace;
+  }
+  pre {
+    margin: 2em 0;
+    padding: 1em;
+    white-space: pre-wrap;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin: 1em 0 .5em 0;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+  }
+  footer {
+    opacity: .4;
+    padding: 2em 0;
+    text-align: center;
+    transition: opacity .2s ease-in-out;
+  }
+  footer:hover {
+    opacity: 1;
+  }
+  p,
+  li {
+    font-size: 14pt;
+  }
+  li {
+    margin: 1em 0;
+  }
+  @media (min-width: 600px) {
+    h1 { font-size: 300%; }
+    h2 { font-size: 200%; }
+    h3 { font-size: 160%; }
+    h4 { font-size: 140%; }
+    h5 { font-size: 120%; }
+    h6 { font-size: 110%; }
+  }
+</style>
+
+<h1>QSS</h1>
+
+<p><strong>A Simple Query Syntax for CSS Element Queries</strong></p>
+
+<img src=https://i.imgur.com/rntpa7l.png>
+
+<p>The goal of QSS is to define a simple syntax for specifying element queries by adding a new ending part between a CSS selector list and the block of rules that help define the breakpoints when those rules are to apply.</p>
+
+<p>Normally in CSS you have something like this:</p>
+
+<pre>selectorList { block }</pre>
+
+<p>We are going to add a new part for our query between the selector list and the block where we will store instructions for when the rule should apply.</p>
+
+<pre>selectorList &lt;query> { block }</pre>
+
+<p>Because this exists as a new part between the selector list and the block of rules, if you have a list of selectors like <code>h1, h2, h3, h4, h5, h6 {}</code> you only need to add the query once after the selector list is complete, like <code>h1, h2, h3, h4, h5, h6 &lt;query> {}</code> rather than <code>h1 &lt;query>, h2 &lt;query>, h3 &lt;query>, …</code>.</p>
+
+<p>This document describes two different formats for expressing element queries for individual CSS rules, one using an <code>if</code>-based structure, and another that uses the <code>@</code> symbol to declare when it should apply.</p>
+
+<h2>Phrase Formats</h2>
+
+<h3>1) if &lt;condition> &lt;comparator> &lt;breakpoint></h3>
+
+<ul>
+  <li>operator: <code>if</code>
+  <li>condition: <code>width</code> | <code>height</code> | <code>characters</code> | <code>children</code> | <code>xscroll</code> | <code>yscroll</code>
+  <li>comparator: <code><</code> | <code>below</code> | <code>under</code> | <code><=</code> | <code>max</code> | <code>==</code> | <code>equals</code> | <code>>=</code> | <code>min</code> | <code>></code> | <code>above</code> | <code>over</code>
+  <li>breakpoint: &lt;number>
+</ul>
+
+<h4>Examples</h4>
+
+<pre>div if width above 500 {}</pre>
+
+<pre>input if characters under 1 {}</pre>
+
+<h3>2) @ &lt;comparator> &lt;breakpoint> &lt;condition></h3>
+
+<ul>
+  <li>operator: <code>@</code>
+  <li>comparator: <code><</code> | <code>below</code> | <code>under</code> | <code><=</code> | <code>max</code> | <code>==</code> | <code>equals</code> | <code>>=</code> | <code>min</code> | <code>></code> | <code>above</code> | <code>over</code>
+  <li>breakpoint: &lt;number>
+  <li>condition: <code>width</code> | <code>height</code> | <code>characters</code> | <code>children</code> | <code>xscroll</code> | <code>yscroll</code>
+</ul>
+
+<h4>Examples</h4>
+
+<pre>div @ above 500 width {}</pre>
+
+<pre>input @ under 1 characters {}</pre>
+
+<p>In both phrase formats the whitespace between tokens is optional, this means that if you prefer to think about these as <code>@above</code> or <code>@min</code> you can express them that way. The following should all equivalent:</p>
+
+<pre>div if width >= 500 {}
+div if width >=500 {}
+div if width min 500 {}
+div @min 500 width {}
+div@min500width{}
+div @ >=500 width {}</pre>
+
+<h2>How it works</h2>
+
+<p>The queries parsed by QSS would be split into the following pieces:</p>
+
+<ul>
+  <li>selector list
+  <li>rule block (or stylesheet?)
+  <li>comparator
+  <li>condition
+  <li>breakpoint
+</ul>
+
+<p>And these could also be used to construct Element Queries for other syntaxes like:</p>
+
+<ul>
+  <li><a href=https://github.com/eqcss/eqcss>EQCSS</a>
+  <li><a href=https://github.com/tomhodgins/cssplus#selectory-a-selector-resolver>Selectory</a>
+  <li>and using functions like the <a href=https://gist.github.com/tomhodgins/fc42b334beaafc75a271b1ef7c8e33ee>container query mixin</a>
+</ul>
+
+<p>Essentially QSS acts as a syntax to abstract away writing these: <a href=https://codepen.io/tomhodgins/post/useful-tests-for-js-powered-styling>Useful Tests for JS-powered Styling</a></p>
+
+<h3>Links</h3>
+
+<ul>
+  <li><strong>Website:</strong> <a href=https://github.com/tomhodgins/qss>github.com/tomhodgins/qss</a>
+  <li><strong>Test:</strong> <a href=tests/index.html>tests/</a>
+  <li><a href=https://codepen.io/tomhodgins/pen/zPzpVR>QSS Playground</a>
+</ul>
+
+<footer>Made with &hearts; by <a href=http://twitter.com/innovati>@innovati</a></footer>

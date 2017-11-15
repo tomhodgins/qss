@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<title>QSS Demo</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: auto;
+  }
+  html {
+    font-size: 14pt;
+    line-height: 1;
+    font-weight: 400;
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 2em;
+  }
+  input, textarea {
+    width: 100%;
+    font-size: 14pt;
+    padding: .5em;
+    margin: 1em 0;
+    display: block;
+  }
+</style>
+
+<h1>QSS Demo</h1>
+
+<h2>At-formatted examples</h2>
+
+<input placeholder="Type less than 5 characters" class=lesser>
+<input placeholder="Type at most 5 characters" class=max>
+<input placeholder="Type exactly 5 characters" class=equal>
+<input placeholder="Type at least 5 characters" class=min>
+<input placeholder="Type greater than 5 characters" class=greater>
+
+<style type="text/qss">
+  /* Using At-formatting */
+  input.lesser @ under 5 characters {
+    background: lime;
+  }
+  input.max @ max 5 characters {
+    background: lime;
+  }
+  input.equal @ equals 5 characters {
+    background: lime;
+  }
+  input.min @ min 5 characters {
+    background: lime;
+  }
+  input.greater @ over 5 characters {
+    background: lime;
+  }
+</style>
+
+<h2>If-formatted examples</h2>
+
+<textarea placeholder="Type less than 5 characters" class=lesser></textarea>
+<textarea placeholder="Type at most 5 characters" class=max></textarea>
+<textarea placeholder="Type exactly 5 characters" class=equal></textarea>
+<textarea placeholder="Type at least 5 characters" class=min></textarea>
+<textarea placeholder="Type greater than 5 characters" class=greater></textarea>
+
+<style type="text/qss">
+  /* Using If-formatting */
+  textarea.lesser if characters < 5 {
+    background: lime;
+  }
+  textarea.max if characters <= 5 {
+    background: lime;
+  }
+  textarea.equal if characters == 5 {
+    background: lime;
+  }
+  textarea.min if characters >= 5 {
+    background: lime;
+  }
+  textarea.greater if characters > 5 {
+    background: lime;
+  }
+</style>
+
+<script src=../qss.js></script>
