@@ -69,6 +69,8 @@ div@min500width{}
 div @ >=500 width {}
 ```
 
+![](https://i.imgur.com/CO2I9Rw.gif)
+
 ## How it works
 
 The queries parsed by QSS would be split into the following pieces:
