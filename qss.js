@@ -1,7 +1,7 @@
 /*
 
 # QSS
-version 0.0.1
+version 0.0.2
 
 A Simple Query Syntax for CSS Element Queries
 
@@ -445,8 +445,8 @@ if (
           condition = 'el.scrollLeft'
           break;
 
-        case 'children':
-          condition = 'el.scrollRight'
+        case 'yscroll':
+          condition = 'el.scrollTop'
           break;
 
       }

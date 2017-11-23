@@ -69,8 +69,6 @@ div@min500width{}
 div @ >=500 width {}
 ```
 
-![](https://i.imgur.com/CO2I9Rw.gif)
-
 ## How it works
 
 The queries parsed by QSS would be split into the following pieces:
@@ -118,5 +116,6 @@ Then you're able to add queries written in QSS syntax to your site using one of 
 ## Links
 
 - Website: [tomhodgins.github.io/qss/](http://tomhodgins.github.io/qss/)
+- Element Query Demo: [tests/](http://tomhodgins.github.io/qss/tests/element-queries.html)
 - Test: [tests/](http://tomhodgins.github.io/qss/tests/)
 - [QSS Playground](https://codepen.io/tomhodgins/pen/zPzpVR)
