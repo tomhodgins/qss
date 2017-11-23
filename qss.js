@@ -1,7 +1,7 @@
 /*
 
 # QSS
-version 0.0.2
+version 0.0.3
 
 A Simple Query Syntax for CSS Element Queries
 
@@ -434,7 +434,7 @@ if (
           break;
 
         case 'characters':
-          condition = '(el.value == undefined ? el.innerHTML.length : el.value.length)'
+          condition = '(el.value == undefined ? el.textContent.length : el.value.length)'
           break;
 
         case 'children':
