@@ -116,6 +116,6 @@ Then you're able to add queries written in QSS syntax to your site using one of 
 ## Links
 
 - Website: [tomhodgins.github.io/qss/](http://tomhodgins.github.io/qss/)
-- Element Query Demo: [tests/](http://tomhodgins.github.io/qss/tests/element-queries.html)
+- Element Query Demo: [tests/element-queries.html](http://tomhodgins.github.io/qss/tests/element-queries.html)
 - Test: [tests/](http://tomhodgins.github.io/qss/tests/)
 - [QSS Playground](https://codepen.io/tomhodgins/pen/zPzpVR)
