@@ -374,7 +374,7 @@ qss.query = function(grouped) {
       }
 
       // @ <comparator> <breakpoint> <condition>
-if (
+      if (
 
         // If last item is a <condition>
         (data[end-1].type == 'word' && conditions.indexOf(data[end-1].data) !== -1)
