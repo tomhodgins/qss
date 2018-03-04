@@ -1,12 +1,11 @@
 /*
 
 # QSS
-version 0.0.3
+version 1.0.0
 
 A Simple Query Syntax for CSS Element Queries
 
 The goal of QSS is to define a simple syntax for specifying element queries by adding a new ending part between a CSS selector list and the block of rules that help define the breakpoints when those rules are to apply.
-
 
     selectorList <query> { block }
 
@@ -230,7 +229,7 @@ qss.parser = function(tokens) {
 
       }
 
-      if (token.type == 'block') {
+      if (token.type === 'block') {
 
         ast.push({
           type: 'block',
@@ -255,7 +254,7 @@ qss.parser = function(tokens) {
 
     }
 
-    if (token.type == 'block') {
+    if (token.type === 'block') {
 
       blockOpen = blockOpen ? false : true
 
@@ -277,11 +276,11 @@ qss.consolidate = function(ast) {
 
     var current = []
 
-    if (token.type == 'selector') {
+    if (token.type === 'selector') {
 
       for (var i=0; i<token.data.length; i++) {
 
-        if (current.length && token.data[i].type == current[current.length-1].type) {
+        if (current.length && token.data[i].type === current[current.length-1].type) {
 
           current[current.length-1].data += token.data[i].data
 
@@ -298,7 +297,7 @@ qss.consolidate = function(ast) {
         data: current
       })
 
-    } else if (token.type == 'block') {
+    } else if (token.type === 'block') {
 
       grouped.push({
         type: 'block',
@@ -325,7 +324,7 @@ qss.query = function(grouped) {
 
   grouped.forEach(item => {
 
-    if (item.type == 'selector') {
+    if (item.type === 'selector') {
 
       selector = ''
 
@@ -337,24 +336,24 @@ qss.query = function(grouped) {
       if (
 
         // If last item is a <breakpoint>
-        data[end-1].type == 'number'
+        data[end-1].type === 'number'
 
         // And second-last item is a <comparator>
         && (
 
           // Operator
-          (data[end-2].type == 'operator' && comparators.indexOf(data[end-2].data) !== -1)
+          (data[end-2].type === 'operator' && comparators.indexOf(data[end-2].data) !== -1)
 
           // Word
-          || (data[end-2].type == 'word' && comparators.indexOf(data[end-2].data) !== -1)
+          || (data[end-2].type === 'word' && comparators.indexOf(data[end-2].data) !== -1)
 
         )
 
         // And third-last item is a <condition>
-        && (data[end-3].type == 'word' && conditions.indexOf(data[end-3].data) !== -1)
+        && (data[end-3].type === 'word' && conditions.indexOf(data[end-3].data) !== -1)
 
         // And fourth-last item is 'if'
-        && (data[end-4].type == 'word' && data[end-4].data == 'if')
+        && (data[end-4].type === 'word' && data[end-4].data === 'if')
 
       ) {
 
@@ -377,24 +376,24 @@ qss.query = function(grouped) {
       if (
 
         // If last item is a <condition>
-        (data[end-1].type == 'word' && conditions.indexOf(data[end-1].data) !== -1)
+        (data[end-1].type === 'word' && conditions.indexOf(data[end-1].data) !== -1)
 
         // And second-last item is a <breakpoint>
-        && data[end-2].type == 'number'
+        && data[end-2].type === 'number'
 
         // And third-last item is a <comparator>
         && (
 
           // Operator
-          (data[end-3].type == 'operator' && comparators.indexOf(data[end-3].data) !== -1)
+          (data[end-3].type === 'operator' && comparators.indexOf(data[end-3].data) !== -1)
 
           // Word
-          || (data[end-3].type == 'word' && comparators.indexOf(data[end-3].data) !== -1)
+          || (data[end-3].type === 'word' && comparators.indexOf(data[end-3].data) !== -1)
 
         )
 
         // And fourth-last item is '@'
-        && (data[end-4].type == 'operator' && data[end-4].data == '@')
+        && (data[end-4].type === 'operator' && data[end-4].data === '@')
 
       ) {
 
@@ -413,7 +412,7 @@ qss.query = function(grouped) {
 
       }
 
-    } else if (selector !== null && item.type == 'block') {
+    } else if (selector !== null && item.type === 'block') {
 
       var rule = ''
 
@@ -434,7 +433,7 @@ qss.query = function(grouped) {
           break;
 
         case 'characters':
-          condition = '(el.value == undefined ? el.textContent.length : el.value.length)'
+          condition = '(el.value === undefined ? el.textContent.length : el.value.length)'
           break;
 
         case 'children':
@@ -492,10 +491,10 @@ qss.stripWhitespace = function(ast) {
 
     if (
       // If whitespace token
-      ast[i].type == 'whitespace'
+      ast[i].type === 'whitespace'
 
       // Or an empty word
-      || ast[i].type == 'word' && ast[i].data.replace(/\s/g, '') == ''
+      || ast[i].type === 'word' && ast[i].data.replace(/\s/g, '') === ''
     ) {
 
       ast.splice(i, 1)
